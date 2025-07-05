@@ -48,6 +48,7 @@ export default function FilteredAgentList({ loading = false }: FilteredAgentList
           <motion.div
             key={agent.id}
             layout
+            className="h-full"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
