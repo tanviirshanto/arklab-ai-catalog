@@ -28,6 +28,7 @@ const filtersSlice = createSlice({
       state.category = action.payload;
     },
     setPricingModel: (state, action: PayloadAction<string>) => {
+        
       state.pricingModel = action.payload;
     },
     clearFilters: () => initialState,

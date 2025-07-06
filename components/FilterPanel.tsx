@@ -132,7 +132,7 @@ export default function FilterPanel() {
             <SelectValue placeholder="All" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="All">All</SelectItem>
+            <SelectItem value="all">All</SelectItem>
             {pricingModels.map((model) => (
               <SelectItem key={model} value={model}>
                 {model}
