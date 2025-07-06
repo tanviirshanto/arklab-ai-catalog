@@ -13,6 +13,8 @@ import { Agent } from "@/lib/types";
 
 import { Card } from "@/components/ui/card";
 import { ThemeSwitcher } from "@/components/theme-switch";
+import { MenuIcon, XIcon } from "lucide-react"; // for toggle icons
+import { Button } from "@/components/ui/button";
 
 interface Props {
   initialAgents: Agent[];
@@ -22,6 +24,7 @@ export default function CatalogPageClient({ initialAgents }: Props) {
   const dispatch = useDispatch<AppDispatch>();
   const filters = useSelector((state: RootState) => state.filters);
   const [loading, setLoading] = useState(true);
+  const [showFilters, setShowFilters] = useState(false); // NEW
 
   useEffect(() => {
     dispatch(setAgents(initialAgents));
@@ -33,14 +36,9 @@ export default function CatalogPageClient({ initialAgents }: Props) {
   if (filters.category.length) activeFilters.push(`Category: ${filters.category.join(", ")}`);
   if (filters.pricingModel) activeFilters.push(`Pricing: ${filters.pricingModel}`);
 
-  const title =
-    activeFilters.length > 0
-      ? `ArkLab AI Agents — Filtered by ${activeFilters.join(" • ")}`
-      : "ArkLab AI Agents Catalog";
+  const title = "ArkLab AI Agents Catalog";
 
-  const description = activeFilters.length
-    ? `Filters applied: ${activeFilters.join(", ")}.`
-    : "Explore and filter powerful AI agents from ArkLab.";
+  const description = "Explore and filter powerful AI agents from ArkLab.";
 
   return (
     <>
@@ -49,21 +47,37 @@ export default function CatalogPageClient({ initialAgents }: Props) {
         <meta name="description" content={description} />
       </Head>
 
-      <main className="max-w-5xl mx-auto p-6 sm:p-10">
-        <Card className="p-8">
+      <main className="max-w-5xl mx-auto p-6">
+        <Card className="p-4 md:p-8">
           <header className="text-center mb-8">
-            <div className="text-4xl font-extrabold flex items-baseline justify-center gap-6 tracking-tight">{title} <ThemeSwitcher /></div>
-            {activeFilters.length > 0 && (
-              <p className="text-muted-foreground text-lg mt-2">{description}</p>
-            )}
+            <div className="text-4xl font-extrabold flex items-baseline justify-center gap-6 tracking-tight">
+              {title} <ThemeSwitcher />
+            </div>
+            
           </header>
 
-          <section className="flex flex-col items-center space-y-6 mb-10">
-            <div className="w-full  max-w-md">
-              <SearchBar /> 
-            </div>
-            <div className="w-full max-w-2xl">
-              <FilterPanel />
+          {/* 🔽 Toggle Button on Small Screens */}
+          <div className="md:hidden flex justify-end mb-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowFilters((prev) => !prev)}
+              className="flex items-center gap-2"
+            >
+              {showFilters ? <XIcon className="w-4 h-4" /> : <MenuIcon className="w-4 h-4" />}
+              {showFilters ? "Hide Filters" : "Show Filters"}
+            </Button>
+          </div>
+
+          {/* 🔽 Filters Panel: always shown on md+, toggle on sm */}
+          <section className={`${showFilters ? "block" : "hidden"} md:block`}>
+            <div className="flex flex-col items-center space-y-6 mb-10">
+              <div className="w-full max-w-md">
+                <SearchBar />
+              </div>
+              <div className="w-full max-w-2xl">
+                <FilterPanel />
+              </div>
             </div>
           </section>
 
@@ -75,3 +89,4 @@ export default function CatalogPageClient({ initialAgents }: Props) {
     </>
   );
 }
+

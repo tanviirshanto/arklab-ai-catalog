@@ -84,11 +84,11 @@ export default function FilterPanel() {
       </div>
 
       {/* Category */}
-      <div className="min-w-[200px] max-h-52 overflow-y-auto pr-2 w-full md:w-auto">
+      <div className="min-w-[200px]  pr-2 w-full md:w-auto">
         <Label className="mb-3 text-lg font-semibold block text-gray-900 dark:text-gray-100">
           Category
         </Label>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 max-h-42 overflow-y-auto">
           <AnimatePresence>
             {categories.map((cat) => (
               <motion.label
