@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ArkLab AI Agents Catalog
 
-## Getting Started
+A feature-rich AI Agent catalog built with **Next.js 14 App Router**, **Redux**, **ShadCN UI**, and **Framer Motion**, enabling users to explore and filter powerful AI agents. This project includes full SSR support and integrated Google Sign-In using **Google Identity Services (GIS)**.
 
-First, run the development server:
+🔗 **Live Demo:** [arklab-ai-catalog.vercel.app](https://arklab-ai-catalog.vercel.app/)
+
+---
+
+## 🚀 Features
+
+- ✅ AI Agent listing with live filtering
+- ✅ Responsive UI using ShadCN + Tailwind CSS
+- ✅ Global state management via Redux Toolkit
+- ✅ Dark/Light mode toggle
+- ✅ Smooth animations with Framer Motion
+- ✅ Google Sign-In integration using **GIS**
+- ✅ Session management in client-side Redux
+
+---
+
+## 🧑‍💻 Getting Started
+
+### 1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/tanviirshanto/arklab-ai-catalog.git
+cd arklab-ai-catalog
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Environment setup
 
-## Learn More
+Create a `.env.local` file at the root:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+NEXTAUTH_SECRET=<generate-a-random-secret>
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Generate a secure secret:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+openssl rand -base64 32
+```
 
-## Deploy on Vercel
+> You can get a Google OAuth Client ID via the [Google Cloud Console](https://console.cloud.google.com/) → OAuth 2.0 → Client ID (Web).  
+> No billing is required as GIS allows basic login.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧠 Design Decisions & Challenges
+
+- **App Router** for modular pages and layouts
+- Redux for predictable global state (agents, filters, user session)
+- ShadCN UI and Tailwind CSS for elegant, responsive components
+- Framer Motion for dynamic card and filter transitions
+- **Challenge:** Redirected from NextAuth due to Google billing constraints — switched to **Google Identity Services (GIS)** for lightweight client-side only login.
+
+---
+
+## 🔐 Google Sign-In (GIS) Integration
+
+1. 📥 GIS script loads on client-side (`GoogleLoginButton.tsx`)
+2. 🎯 On successful login, JWT is decoded via `jwt-decode`
+3. 🔐 User info (name, email, picture) stored in Redux via `setUser`
+4. 🔓 `GoogleLogoutButton.tsx` clears session and disables auto sign-in
+
+---
+
+## ✅ To Do (Future Enhancements)
+
+- Persist Redux user session using `redux-persist`
+- Add admin interface for adding/editing agents
+- Write automated tests with Jest or Vitest
+- Display interactive screenshots or UI demos in README
+
+---
+
+## 📝 License
+
+This project is for educational and technical assessment purposes only.
+
+---
+
+## 🙋‍♂️ Author
+
+**Tanviir Hossen** – [@tanviirshanto](https://github.com/tanviirshanto)
+
+🚀 Live Demo: [arklab-ai-catalog.vercel.app](https://arklab-ai-catalog.vercel.app/)

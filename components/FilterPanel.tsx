@@ -143,7 +143,7 @@ export default function FilterPanel() {
       </div>
 
       {/* Clear Filters */}
-      <div className="w-full mt-4 md:mt-0 md:absolute md:bottom-4 md:right-6 flex justify-start md:justify-end">
+      <div className=" mt-4 md:mt-0 md:absolute md:bottom-4 md:right-6 flex justify-start md:justify-end">
         <Button
           variant="link"
           onClick={() => dispatch(clearFilters())}
