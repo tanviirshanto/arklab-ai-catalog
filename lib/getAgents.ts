@@ -2,7 +2,7 @@
 import { Agent } from "@/lib/types";
 
 export async function getAgents(): Promise<Agent[]> {
-  const res = await fetch("http://localhost:3000/mock-agents.json", {
+  const res = await fetch("https://arklab-ai-catalog.vercel.app/mock-agents.json", {
     cache: "no-store", 
   });
 
